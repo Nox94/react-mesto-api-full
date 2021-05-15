@@ -1,0 +1,30 @@
+.profile__heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 33px;
+  text-align: center;
+  color: #ffffff;
+  order: 1;
+  margin: 0 10px 0 0;
+}
+
+@media screen and (min-width: 480px) {
+  .profile__heading {
+    font-size: 31px;
+    line-height: 114%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .profile__heading {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .profile__heading {
+    margin: 0 26px 0 0;
+    font-size: 41px;
+  }
+}

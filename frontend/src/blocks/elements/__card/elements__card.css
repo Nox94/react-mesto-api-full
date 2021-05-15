@@ -1,0 +1,26 @@
+.elements__card {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 282px;
+  background-color: #fff;
+  margin: 0 0 20px 0;
+  border-radius: 10px;
+  padding-bottom: 25px;
+  position: relative;
+}
+
+.elements__card:last-child {
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 600px) {
+  .elements__card {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .elements__card {
+    margin: 0;
+  }
+}

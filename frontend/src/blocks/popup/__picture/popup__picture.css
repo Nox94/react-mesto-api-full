@@ -1,0 +1,6 @@
+.popup__picture {
+  min-width: 240px;
+  max-width: 75vw;
+  max-height: 75vh;
+  order: 1;
+}

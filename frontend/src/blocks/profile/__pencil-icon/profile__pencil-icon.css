@@ -1,0 +1,24 @@
+.profile__pencil-icon{
+    /* outline: 1px solid greenyellow; */
+    position: relative;
+}
+
+.profile__pencil-icon::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 0.8s;
+}
+
+.profile__pencil-icon:hover::after{
+    opacity: 0.8;
+    background-image: url(../../../images/pencil-icon.png);
+    background-position: bottom 50% left 40%;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}

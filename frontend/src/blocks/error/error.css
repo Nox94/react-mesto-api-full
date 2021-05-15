@@ -1,0 +1,17 @@
+.error {
+    font-size: 12px;
+    line-height: 14px;
+    color: #FF0000;
+    display: block;
+    margin: 5px 0 0 0;
+    box-sizing: border-box;
+    height: 25px;
+  }
+
+  .error:first-of-type {
+    margin: 5px 0 13px 0;
+  }
+
+  .error:last-of-type {
+    margin: 5px 0 25px 0;
+  }

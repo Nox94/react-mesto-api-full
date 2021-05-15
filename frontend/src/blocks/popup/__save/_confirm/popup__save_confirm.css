@@ -1,0 +1,20 @@
+.popup__save_confirm{
+    width: 100%;
+}
+
+@media screen and (min-width: 486px) {
+    .popup__save_confirm {
+        width: 250px;
+    }
+}
+@media screen and (min-width: 720px) {
+    .popup__save_confirm {
+        width: 280px;
+    }
+}
+
+@media screen and (min-width: 1180px) {
+    .popup__save_confirm {
+        width: 358px;
+    }
+}

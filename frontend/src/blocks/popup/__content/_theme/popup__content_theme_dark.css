@@ -1,0 +1,44 @@
+.popup__content_theme_dark {
+  background-color: transparent;
+  color: #000;
+  max-width: 88vw;
+  padding: 25px 22px;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 450px) {
+  .popup__content_theme_dark {
+    max-width: 66vw;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .popup__content_theme_dark {
+    max-width: 53vw;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .popup__content_theme_dark {
+    max-width: 44vw;
+  }
+}
+
+@media screen and (min-width: 925px) {
+  .popup__content_theme_dark {
+    max-width: 40vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .popup__content_theme_dark {
+    padding: 34px 36px 36px;
+    max-width: 430px;
+  }
+}

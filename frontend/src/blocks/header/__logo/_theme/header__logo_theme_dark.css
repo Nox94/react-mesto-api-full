@@ -1,0 +1,22 @@
+.header__logo_theme_dark {
+  margin: 0 0 30px 0;
+}
+
+
+@media screen and (min-width: 600px) {
+  .header__logo_theme_dark {
+    margin: 0 0 35px 0;
+  }
+}
+
+
+@media screen and (min-width: 900px) {
+  .header__logo_theme_dark {
+    margin: 0 0 40px 0;
+  }
+}
+
+.header__logo_theme_dark:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}

@@ -1,0 +1,11 @@
+.popup__form-fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+@media screen and (min-width: 1000px) {
+  .popup__form-fieldset {
+    width: 100%;
+  }
+}

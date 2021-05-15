@@ -1,0 +1,7 @@
+.elements__another-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* outline: 1px solid red; */
+    justify-content: center;
+    align-items: center;
+}

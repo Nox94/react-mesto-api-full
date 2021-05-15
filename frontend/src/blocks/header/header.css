@@ -1,0 +1,28 @@
+.header {
+  min-width: 320px;
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 30px;
+  padding-left: 27px;
+  padding-right: 27px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+@media screen and (min-width: 600px) {
+  .header {
+    padding: 45px 20px 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding: 45px 0 0;
+  }
+}
