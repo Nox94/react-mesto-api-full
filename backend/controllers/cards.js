@@ -6,20 +6,22 @@ const NoIdFoundError = require('../errors/NoIdFoundError'); // 404
 
 module.exports.getAllCards = (req, res, next) => {
   Card.find({})
-    .populate(['owner', 'likes'])
+    // .populate(['owner', 'likes'])
+    .populate(['likes'])
     .then((cards) => {
       if (!cards) {
         throw new NoIdFoundError('Запрашиваемая вами информация не найдена.');
       }
-      res.send({ data: cards });
+      res.send(cards);
     })
     .catch(next);
 };
 module.exports.createCard = (req, res, next) => {
   const owner = req.user._id;
+  // console.log(owner);
   const { name, link } = req.body;
   Card.create({ name, link, owner })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new CastError('Введены некорректные данные.'));
@@ -61,6 +63,7 @@ module.exports.deleteCard = (req, res, next) => {
 module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
   const { _id } = req.user;
+  // console.log(cardId, _id);
   Card.findByIdAndUpdate(cardId, { $addToSet: { likes: _id } }, { new: true })
     .orFail(new NoIdFoundError('NotFound'))
     .populate(['likes'])
@@ -94,7 +97,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         next(new NoIdFoundError('Карточка с указанным _id не найдена.'));
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

@@ -28,7 +28,7 @@ module.exports.getOneUserById = (req, res, next) => {
       if (!user) {
         throw new NoIdFoundError('Пользователь по указанному id не найден.');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.message === 'NoIdFound') {
@@ -51,7 +51,7 @@ module.exports.createUser = (req, res, next) => {
       avatar,
       email,
       password: hash, // хеш записан в базу
-    }).then((user) => res.status(201).send({ data: user })))
+    }).then((user) => res.status(201).send(user)))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new CastError('Переданы некорректные данные при создании пользователя.'));
@@ -75,7 +75,7 @@ module.exports.updateUsersProfileById = (req, res, next) => {
       }
       res
         .status(201)
-        .send({ data: user })
+        .send( user )
         .catch((err) => {
           if (err.name === 'ValidationError') {
             next(new CastError('Переданы некорректные данные при обновлении профиля.'));
@@ -85,7 +85,7 @@ module.exports.updateUsersProfileById = (req, res, next) => {
             next(err);
           }
         });
-    });
+    }).catch(next);
 };
 
 module.exports.updateUsersAvatarById = (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateUsersAvatarById = (req, res, next) => {
       if (!avatar) {
         throw new CastError('Переданы некорректные данные при обновлении аватара.');
       }
-      res.status(201).send({ data: avatar });
+      res.status(201).send(avatar);
     })
     .catch((err) => {
       if (err.message === 'NoIdFound') {
@@ -137,7 +137,7 @@ module.exports.login = (req, res, next) => {
             sameSite: true,
             maxAge: 36000000 * 24 * 7,
           })
-            .send({ _id: user._id });
+            .status(200).send({ _id: user._id, token });
         });
     })
     .catch((err) => { // eslint-disable-next-line consistent-return

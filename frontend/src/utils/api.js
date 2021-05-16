@@ -31,19 +31,13 @@ class Api {
 
   changeLikeCardStatus(id, like) {
     const method = like ? "PUT" : "DELETE";
-    return fetch(
-      // eslint-disable-next-line no-useless-concat
-      this._baseUrl + "/cards/likes/" + `${id}`,
-      {
-        method: method,
-        headers: this._headers,
-      }
-    ).then((res) =>
+    return fetch(this._baseUrl + "/cards/" + `${id}` + "/likes", {
+      method: method,
+      headers: this._headers,
+    }).then((res) =>
       res.ok
         ? res.json()
-        : Promise.reject(`Error! ${res.statusText}`).catch((err) =>
-            console.log(err)
-          )
+        : Promise.reject(`Error! ${res.statusText}`).catch((err) => console.log(err))
     );
   }
 
@@ -55,25 +49,24 @@ class Api {
   }
 
   changeUserAvatar(data) {
-    return fetch(
-      this._baseUrl + "/users/me/avatar",
-      {
-        method: "PATCH",
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar: data.avatar,
-        }),
-      }
-    ).then(handleOriginalResponse);
+    return fetch(this._baseUrl + "/users/me/avatar", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    }).then(handleOriginalResponse);
   }
 
-  createNewCard(data) {
+  createNewCard(card) {
+    // console.log(card);
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        link: data.link,
+        name: card.name,
+        link: card.link,
+        owner: card.owner,
       }),
     }).then(handleOriginalResponse);
   }
@@ -86,7 +79,7 @@ class Api {
   }
 }
 
-export const api = new Api("https://mesto.nomoreparties.co/v1/cohort-20", {
-  authorization: "d4a6d15c-215f-42d6-9f0c-2c3e2870f744",
+export const api = new Api("http://localhost:3005", {
+  authorization: localStorage.getItem('token'),
   "Content-Type": "application/json",
 });

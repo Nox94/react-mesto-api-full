@@ -1,4 +1,4 @@
-const baseUrl = "https://auth.nomoreparties.co";
+const baseUrl = "http://localhost:3005";
 
 export const register = (email, password) => {
   return fetch(`${baseUrl}/signup`, {
@@ -46,10 +46,9 @@ export const getContent = (token) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: localStorage.getItem('token'),
     },
   })
     .then((res) => res.json())
-    .then(({ data }) => data)
     .catch((err) => console.log(err));
 };

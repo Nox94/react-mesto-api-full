@@ -33,9 +33,10 @@ function App() {
   const [userEmail, setUserEmail] = React.useState(""); //стейт для мыла в шапке сайта
   const [toolTipStatus, setToolTipStatus] = React.useState("fail");
   const [toolTipOpen, setToolTipOpen] = React.useState(false);
-
   const history = useHistory();
+  
   useEffect(() => {
+    handleTokenCheck();
     api
       .getTheCards()
       .then((result) => {
@@ -44,17 +45,13 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    handleTokenCheck();
-  }, []);
-
   function handleTokenCheck() {
     const token = localStorage.getItem("token");
-    // console.log(token);
+    // console.log(token); // есть 
     if (token) {
       // проверим токен
       auth.getContent(token).then((res) => {
-        // console.log(res); //есть данные
+        // console.log(res); //объект пользователя
         if (res) {
           setUserEmail(res.email);
           setLoggedIn(true);
@@ -67,7 +64,7 @@ function App() {
   function handleTokenErase() {
     localStorage.setItem("token", "");
     // console.log(localStorage);
-    setUserEmail(" ");
+    setUserEmail("");
     setLoggedIn(false);
   }
 
@@ -238,10 +235,6 @@ function App() {
                 <Register onSubmit={handleRegisterSubmit} />
               </div>
             </Route>
-
-            {/* <Route exact path="/">
-              {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
-            </Route> */}
           </Switch>
 
           <Footer />
