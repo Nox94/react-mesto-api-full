@@ -20,17 +20,35 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-const origin = [
+// const origin = [
+//   'http://localhost:3000',
+//   'https://nox-mesto.nomoredomains.monster',
+// ];
+
+var whitelist = [
   'http://localhost:3000',
   'https://nox-mesto.nomoredomains.monster',
+  'http://nox-mesto.nomoredomains.monster',
 ];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
-app.use(cors({
-  origin,
-  credentials: true,
-})); // с настройками по умолч.
+app.use(cors(corsOptions)); // с настройками по умолч.
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(cookieParser());
-
 app.use(requestLogger); // логгер запросов
 app.post('/signup', express.json(), createUser);
 app.post('/signin', express.json(), login);
