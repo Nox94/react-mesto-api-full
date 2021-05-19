@@ -20,7 +20,15 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-app.use(cors()); // с настройками по умолч.
+const origin = [
+  'http://localhost:3000',
+  'https://nox-mesto.nomoredomains.monster',
+];
+
+app.use(cors({
+  origin,
+  credentials: true,
+})); // с настройками по умолч.
 app.use(cookieParser());
 
 app.use(requestLogger); // логгер запросов
