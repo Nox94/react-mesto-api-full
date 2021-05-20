@@ -26,7 +26,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 // ];
 
 var whitelist = [
-  'http://localhost:3000',
+  'http://localhost:3005',
   'https://nox-mesto.nomoredomains.monster',
   'http://nox-mesto.nomoredomains.monster',
 ];
