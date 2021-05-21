@@ -12,18 +12,13 @@ const NoFoundError = require('./errors/NoIdFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 3005 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
-// const origin = [
-//   'http://localhost:3000',
-//   'https://nox-mesto.nomoredomains.monster',
-// ];
 
 var whitelist = [
   'http://localhost:3005',
@@ -40,7 +35,7 @@ var corsOptions = {
   },
 };
 
-app.use(cors(corsOptions)); // с настройками по умолч.
+app.use(cors(corsOptions));
 
 app.get('/crash-test', () => {
   setTimeout(() => {

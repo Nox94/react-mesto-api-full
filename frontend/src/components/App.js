@@ -181,6 +181,7 @@ function App() {
     auth
       .register(userEmail, password)
       .then((res) => {
+        console.log(res);
         if (res.data._id) {
           setToolTipStatus("success");
           setToolTipOpen(true);

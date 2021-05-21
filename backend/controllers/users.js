@@ -9,7 +9,7 @@ const RegisterError = require('../errors/RegisterError');
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
