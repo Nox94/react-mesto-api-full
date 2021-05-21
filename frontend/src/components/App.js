@@ -182,7 +182,7 @@ function App() {
       .register(userEmail, password)
       .then((res) => {
         console.log(res);
-        if (res.data._id) {
+        if (res._id) {
           setToolTipStatus("success");
           setToolTipOpen(true);
           history.push("/signin");
