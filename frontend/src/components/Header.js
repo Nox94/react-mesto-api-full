@@ -1,8 +1,8 @@
 import logo from "../images/logo.svg";
 import { Link, Route } from "react-router-dom";
 export default function Header(props) {
-  const handleTokenErase = () => {
-    props.tokenErase();
+  const handleDataErase = () => {
+    props.dataErase();
   };
 
   return (
@@ -28,7 +28,7 @@ export default function Header(props) {
           <Link
             to="/signin"
             className="header__exit"
-            onClick={handleTokenErase}
+            onClick={handleDataErase}
           >
             Выход
           </Link>

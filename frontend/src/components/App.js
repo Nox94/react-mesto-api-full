@@ -61,10 +61,10 @@ function App() {
     }
   }
 
-  function handleTokenErase() {
+  function handleDataErase() {
     localStorage.setItem("token", "");
-    // console.log(localStorage);
     setUserEmail("");
+    setCurrentUser({});
     setLoggedIn(false);
   }
 
@@ -98,7 +98,6 @@ function App() {
       .getUserInfo()
       .then((result) => {
         setCurrentUser(result);
-        // console.log(currentUser);
         //устанавливает объект с данными юзера как значение переменной
       })
       .catch((err) => console.log(err));
@@ -181,14 +180,13 @@ function App() {
     auth
       .register(userEmail, password)
       .then((res) => {
-        console.log(res);
-        if (res._id) {
+        if (!res._id) {
+          setToolTipStatus("fail");
+          setToolTipOpen(true);
+        } else {
           setToolTipStatus("success");
           setToolTipOpen(true);
           history.push("/signin");
-        } else {
-          setToolTipStatus("fail");
-          setToolTipOpen(true);
         }
       })
       .catch((err) => {
@@ -207,7 +205,7 @@ function App() {
             loggedIn={loggedIn}
             userData={currentUser}
             email={userEmail} //для мыла в шапке
-            tokenErase={handleTokenErase}
+            dataErase={handleDataErase}
           />
           <Switch>
             <ProtectedRoute

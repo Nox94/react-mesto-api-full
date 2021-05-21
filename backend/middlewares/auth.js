@@ -7,19 +7,16 @@ module.exports = (req, res, next) => {
   const token = req.headers.authorization;
   // console.log(req.headers.authorization);
   if (!token) {
-    const customError = new AuthError('Необходима авторизация.');
-    next(customError);
+    next(new AuthError('Необходима авторизация.'));
   } else {
     let payload;
-
     try {
       payload = jwt.verify(
         token,
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
       );
     } catch (err) {
-      const customError = new AuthError('Необходима авторизация.');
-      next(customError);
+      next(new AuthError('Необходима авторизация.'));
     }
     req.user = payload;
     next();

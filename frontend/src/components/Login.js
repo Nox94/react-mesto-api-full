@@ -14,7 +14,6 @@ function Login(props) {
     e.preventDefault();
     props.onSubmit(userEmail, password);
     // здесь обрабатываем вход в систему
-    // запускается, если пользователь не найден}
   };
 
   return (
