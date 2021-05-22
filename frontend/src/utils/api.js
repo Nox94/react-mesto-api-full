@@ -49,7 +49,7 @@ class Api {
   }
 
   changeUserAvatar(data) {
-    console.log(data);
+    console.log(data.avatar);
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: { authorization: localStorage.getItem("token") },
