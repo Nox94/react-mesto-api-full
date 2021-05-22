@@ -84,7 +84,7 @@ class Api {
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.nox-mesto.nomoredomains.monster"
-    : "localhost:3005";
+    : "localhost:3000";
 
 export const api = new Api(baseUrl, {
   // authorization: localStorage.getItem("token"),
