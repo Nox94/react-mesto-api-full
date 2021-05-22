@@ -37,21 +37,33 @@ function App() {
   
   useEffect(() => {
     handleTokenCheck();
-    api
-      .getTheCards()
-      .then((result) => {
-        setCards(result);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    if (loggedIn) {
+      api
+        .getTheCards()
+        .then((result) => {
+          setCards(result);
+        })
+        .catch((err) => console.log(err));
+
+      //переменная состояния текущего пользователя
+      //api.getUserInfo обновляет стейт-переменную из полученного значения.
+      api
+        .getUserInfo()
+        .then((result) => {
+          setCurrentUser(result);
+          //устанавливает объект с данными юзера как значение переменной
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   function handleTokenCheck() {
     const token = localStorage.getItem("token");
-    // console.log(token); // есть 
+    // console.log(token);
     if (token) {
       // проверим токен
       auth.getContent(token).then((res) => {
-        // console.log(res); //объект пользователя
+        // console.log(res); // объект пользователя
         if (res) {
           setUserEmail(res.email);
           setLoggedIn(true);
@@ -91,17 +103,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  //добавила переменную состояния текущего пользователя и эффект,
-  //который вызывает api.getUserInfo и обновляет стейт-переменную из полученного значения.
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((result) => {
-        setCurrentUser(result);
-        //устанавливает объект с данными юзера как значение переменной
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
