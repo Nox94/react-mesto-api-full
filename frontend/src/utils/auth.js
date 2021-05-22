@@ -1,7 +1,7 @@
 const baseUrl =
   process.env.NODE_ENV === 'production'
     ? 'https://api.nox-mesto.nomoredomains.monster'
-    : 'localhost:3050';
+    : 'localhost:3005';
 
 export const register = (email, password) => {
   return fetch(`${baseUrl}/signup`, {

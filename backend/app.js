@@ -49,8 +49,9 @@ app.post('/signup', express.json(), createUser);
 app.post('/signin', express.json(), login);
 
 // auth дает req.user._id
-app.use('/users', auth, users);
-app.use('/cards', auth, cards);
+app.use(auth);
+app.use('/users', users);
+app.use('/cards', cards);
 app.use('*', (req, res, next) => {
   next(new NoFoundError('Запрашиваемая страница не найдена.'));
 });
