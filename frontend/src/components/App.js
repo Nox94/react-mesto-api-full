@@ -58,11 +58,11 @@ function App() {
 
   function handleTokenCheck() {
     const token = localStorage.getItem("token");
-    // console.log(token);
+    console.log(token);
     if (token) {
       // проверим токен
       auth.getContent(token).then((res) => {
-        // console.log(res); //объект пользователя
+        console.log(res); //объект пользователя
         if (res) {
           setUserEmail(res.email);
           setLoggedIn(true);
