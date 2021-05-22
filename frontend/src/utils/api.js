@@ -21,7 +21,7 @@ class Api {
   saveUserInfo(data) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { authorization: localStorage.getItem("token"), },
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -33,7 +33,7 @@ class Api {
     const method = like ? "PUT" : "DELETE";
     return fetch(this._baseUrl + "/cards/" + `${id}` + "/likes", {
       method: method,
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { authorization: localStorage.getItem("token"), },
     }).then((res) =>
       res.ok
         ? res.json()
@@ -44,14 +44,14 @@ class Api {
   getTheCards() {
     return fetch(this._baseUrl + "/cards", {
       method: "GET",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { authorization: localStorage.getItem("token"), },
     }).then(handleOriginalResponse);
   }
 
   changeUserAvatar(data) {
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { authorization: localStorage.getItem("token"), },
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -62,7 +62,7 @@ class Api {
     // console.log(card);
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { authorization: localStorage.getItem("token"), },
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -74,7 +74,7 @@ class Api {
   removeCard(id) {
     return fetch(this._baseUrl + "/cards/" + `${id}`, {
       method: "DELETE",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { authorization: localStorage.getItem("token"), },
     }).then(handleOriginalResponse);
   }
 }
@@ -85,7 +85,7 @@ const baseUrl =
     : 'localhost:3050';
 
 export const api = new Api(baseUrl, {
-  authorization: localStorage.getItem("token"),
+  // authorization: localStorage.getItem("token"),
   "Content-Type": "application/json",
   Accept: "application/json",
 });
