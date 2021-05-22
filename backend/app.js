@@ -27,13 +27,7 @@ var whitelist = [
   'http://nox-mesto.nomoredomains.monster',
 ];
 var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: whitelist
 };
 
 app.use(cors(corsOptions));
@@ -65,6 +59,7 @@ app.use(errors());
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
+  console.log(err);
   res.status(statusCode).send({
     message: statusCode === 500 ? 'Ошибка сервера.' : message,
   });
