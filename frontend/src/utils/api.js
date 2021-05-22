@@ -54,7 +54,7 @@ class Api {
       method: "PATCH",
       headers: { authorization: localStorage.getItem("token") },
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: data,
       }),
     }).then(handleOriginalResponse);
   }
