@@ -14,7 +14,7 @@ class Api {
   getUserInfo() {
     return fetch(this._baseUrl + "/users/me", {
       method: "GET",
-      headers: this._headers,
+      headers: {authorization: localStorage.getItem("token"),},
     }).then(handleOriginalResponse);
   }
 
@@ -85,7 +85,7 @@ const baseUrl =
     : 'localhost:3050';
 
 export const api = new Api(baseUrl, {
-  authorization: localStorage.getItem("token"),
+  // authorization: localStorage.getItem("token"),
   "Content-Type": "application/json",
   Accept: "application/json",
 });
