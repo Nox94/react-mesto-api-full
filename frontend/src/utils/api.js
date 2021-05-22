@@ -48,12 +48,12 @@ class Api {
     }).then(handleOriginalResponse);
   }
 
-  changeUserAvatar(data) {
+  changeUserAvatar(url) {
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: { authorization: localStorage.getItem("token"), },
       body: JSON.stringify({
-        avatar: data,
+        url,
       }),
     }).then(handleOriginalResponse);
   }
