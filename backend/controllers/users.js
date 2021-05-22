@@ -125,7 +125,7 @@ module.exports.updateUsersAvatarById = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const { NODE_ENV, JWT_SECRET } = process.env;
   const { email, password } = req.body;
-
+  console.log(req.body);
   User.findOne({ email })
     .select('+password')
     .then((user) => {

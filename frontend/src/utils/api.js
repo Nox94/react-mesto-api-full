@@ -1,3 +1,9 @@
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.nox-mesto.nomoredomains.monster"
+    : "http://localhost:3000";
+
 const handleOriginalResponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Error: ${res.status}`);
@@ -84,7 +90,6 @@ class Api {
 
 
 export const api = new Api(baseUrl, {
-  // authorization: localStorage.getItem("token"),
   "Content-Type": "application/json",
   Accept: "application/json",
 });

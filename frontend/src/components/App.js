@@ -73,7 +73,7 @@ function App() {
   }
 
   function handleDataErase() {
-    localStorage.setItem("token", "");
+    localStorage.removeItem("token");
     setUserEmail("");
     setCurrentUser({});
     setLoggedIn(false);
