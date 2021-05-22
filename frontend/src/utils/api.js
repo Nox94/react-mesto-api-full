@@ -19,6 +19,7 @@ class Api {
   }
 
   saveUserInfo(data) {
+    console.log(data);
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: { authorization: localStorage.getItem("token") },

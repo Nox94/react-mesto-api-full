@@ -92,7 +92,7 @@ module.exports.updateUsersAvatarById = (req, res, next) => {
 
   User.findByIdAndUpdate(
     req.user._id,
-    { avatar: req.body.avatar },
+    { avatar: req.user.avatar },
     { new: true, runValidators: true },
   )
     .then((avatar) => {
