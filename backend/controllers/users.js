@@ -89,10 +89,10 @@ module.exports.updateUsersProfileById = (req, res, next) => {
 };
 
 module.exports.updateUsersAvatarById = (req, res, next) => {
-  console.log(req);
+
   User.findByIdAndUpdate(
     req.user._id,
-    { avatar: req.body.avatar },
+    { avatar: req.avatar },
     { new: true, runValidators: true },
   )
     .then((avatar) => {
