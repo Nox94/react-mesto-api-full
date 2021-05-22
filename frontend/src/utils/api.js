@@ -14,7 +14,7 @@ class Api {
   getUserInfo() {
     return fetch(this._baseUrl + "/users/me", {
       method: "GET",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { ...this._headers, authorization: localStorage.getItem("token") },
     }).then(handleOriginalResponse);
   }
 
@@ -22,7 +22,7 @@ class Api {
     // console.log(data);
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: {...this._headers, authorization: localStorage.getItem("token") },
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -34,7 +34,7 @@ class Api {
     const method = like ? "PUT" : "DELETE";
     return fetch(this._baseUrl + "/cards/" + `${id}` + "/likes", {
       method: method,
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { ...this._headers, authorization: localStorage.getItem("token") },
     }).then((res) =>
       res.ok
         ? res.json()
@@ -45,7 +45,7 @@ class Api {
   getTheCards() {
     return fetch(this._baseUrl + "/cards", {
       method: "GET",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { ...this._headers, authorization: localStorage.getItem("token") },
     }).then(handleOriginalResponse);
   }
 
@@ -53,7 +53,7 @@ class Api {
     console.log(data);
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { ...this._headers, authorization: localStorage.getItem("token") },
       body: JSON.stringify({
         avatar: data,
       }),
@@ -64,7 +64,7 @@ class Api {
     // console.log(card);
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { ...this._headers, authorization: localStorage.getItem("token") },
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -76,15 +76,12 @@ class Api {
   removeCard(id) {
     return fetch(this._baseUrl + "/cards/" + `${id}`, {
       method: "DELETE",
-      headers: { authorization: localStorage.getItem("token") },
+      headers: { ...this._headers, authorization: localStorage.getItem("token") },
     }).then(handleOriginalResponse);
   }
 }
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://api.nox-mesto.nomoredomains.monster"
-    : "localhost:3000";
+
 
 export const api = new Api(baseUrl, {
   // authorization: localStorage.getItem("token"),
