@@ -85,7 +85,7 @@ const baseUrl =
     : 'localhost:3050';
 
 export const api = new Api(baseUrl, {
-  // authorization: localStorage.getItem("token"),
+  authorization: localStorage.getItem("token"),
   "Content-Type": "application/json",
   Accept: "application/json",
 });
