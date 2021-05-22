@@ -49,7 +49,7 @@ class Api {
   }
 
   changeUserAvatar(data) {
-    console.log(data.avatar);
+    console.log(data);
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: { authorization: localStorage.getItem("token") },
@@ -86,7 +86,7 @@ const baseUrl =
     : "localhost:3050";
 
 export const api = new Api(baseUrl, {
-  authorization: localStorage.getItem("token"),
+  // authorization: localStorage.getItem("token"),
   "Content-Type": "application/json",
   Accept: "application/json",
 });

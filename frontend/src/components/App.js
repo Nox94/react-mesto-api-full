@@ -39,6 +39,15 @@ function App() {
     handleTokenCheck();
     if (loggedIn) {
       api
+        .getUserInfo()
+        .then((result) => {
+          console.log(result);
+          setCurrentUser(result);
+          //устанавливает объект с данными юзера как значение переменной
+        })
+        .catch((err) => console.log(err));
+      
+      api
         .getTheCards()
         .then((result) => {
           setCards(result);
@@ -93,18 +102,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  //добавила переменную состояния текущего пользователя и эффект,
-  //который вызывает api.getUserInfo и обновляет стейт-переменную из полученного значения.
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((result) => {
-        console.log(result);
-        setCurrentUser(result);
-        //устанавливает объект с данными юзера как значение переменной
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
