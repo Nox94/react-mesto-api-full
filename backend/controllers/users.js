@@ -91,8 +91,8 @@ module.exports.updateUsersProfileById = (req, res, next) => {
 module.exports.updateUsersAvatarById = (req, res, next) => {
 
   User.findByIdAndUpdate(
-    req.user._id,
-    { avatar: req.user.avatar },
+    req.body._id,
+    { avatar: req.body.avatar },
     { new: true, runValidators: true },
   )
     .then((avatar) => {
