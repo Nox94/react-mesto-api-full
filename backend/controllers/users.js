@@ -104,7 +104,7 @@ module.exports.updateUsersProfileById = (req, res, next) => {
 
 module.exports.updateUsersAvatarById = (req, res, next) => {
   const { id, avatar } = req.body;
-  User.findByIdAndUpdate(id, { avatar }, { new: true, runValidators: true })
+  User.findByIdAndUpdate(id, avatar, { new: true, runValidators: true })
     .then((avatar) => {
       if (!avatar) {
         throw new CastError(
