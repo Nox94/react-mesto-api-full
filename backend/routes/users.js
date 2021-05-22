@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 const {
   getAllUsers,
@@ -24,7 +23,6 @@ router.get(
 
 router.patch(
   '/me',
-  express.json(),
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
@@ -36,7 +34,6 @@ router.patch(
 
 router.patch(
   '/me/avatar',
-  express.json(),
   celebrate({
     body: Joi.object().keys({
       avatar: Joi.string()

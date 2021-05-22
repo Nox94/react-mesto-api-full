@@ -12,6 +12,7 @@ const NoFoundError = require('./errors/NoIdFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+app.use(express.json());
 const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
@@ -49,9 +50,10 @@ app.post('/signup', express.json(), createUser);
 app.post('/signin', express.json(), login);
 
 // auth дает req.user._id
-app.use(auth);
-app.use('/users', users);
-app.use('/cards', cards);
+
+app.use('/users',auth, users);
+app.use('/cards', auth, cards);
+
 app.use('*', (req, res, next) => {
   next(new NoFoundError('Запрашиваемая страница не найдена.'));
 });
@@ -59,11 +61,13 @@ app.use('*', (req, res, next) => {
 app.use(errorLogger); // логгер ошибок
 
 app.use(errors());
+
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
     message: statusCode === 500 ? 'Ошибка сервера.' : message,
   });
+  next();
 });
 
 app.listen(PORT, () => {
