@@ -161,8 +161,6 @@ function App() {
       .then((res) => {
         console.log(res);
         if (res.token) {
-          // setToolTipStatus("success");
-          // setToolTipOpen(true);
           setLoggedIn(true);
           setUserEmail(userEmail);
           history.push("/");

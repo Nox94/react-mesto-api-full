@@ -5,7 +5,8 @@ const baseUrl =
     ? "https://api.nox-mesto.nomoredomains.monster"
     : "http://localhost:3000";
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
+console.log(token);
 
 const handleOriginalResponse = (res) => {
   if (!res.ok) {
@@ -23,7 +24,7 @@ class Api {
   getUserInfo() {
     return fetch(this._baseUrl + "/users/me", {
       method: "GET",
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}`, },
+      headers: { ...this._headers, 'Authorization': token },
     }).then(handleOriginalResponse);
   }
 
@@ -31,7 +32,7 @@ class Api {
     // console.log(data);
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}` },
+      headers: { ...this._headers, 'Authorization': token },
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -43,7 +44,7 @@ class Api {
     const method = like ? "PUT" : "DELETE";
     return fetch(this._baseUrl + "/cards/" + `${id}` + "/likes", {
       method: method,
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}`, },
+      headers: { ...this._headers, 'Authorization': token, },
     }).then((res) =>
       res.ok
         ? res.json()
@@ -54,17 +55,17 @@ class Api {
   getTheCards() {
     return fetch(this._baseUrl + "/cards", {
       method: "GET",
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}`, },
+      headers: { ...this._headers, 'Authorization': token, },
     }).then(handleOriginalResponse);
   }
 
   changeUserAvatar(data) {
-    console.log(data);
+    console.log(data.avatar);
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}`, },
+      headers: { ...this._headers, 'Authorization': token, },
       body: JSON.stringify({
-        avatar: data,
+        avatar: data.avatar,
       }),
     }).then(handleOriginalResponse);
   }
@@ -73,7 +74,7 @@ class Api {
     // console.log(card);
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}`, },
+      headers: { ...this._headers, 'Authorization': token, },
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -85,7 +86,7 @@ class Api {
   removeCard(id) {
     return fetch(this._baseUrl + "/cards/" + `${id}`, {
       method: "DELETE",
-      headers: { ...this._headers, 'Authorization': `Bearer ${token}`, },
+      headers: { ...this._headers, 'Authorization': token, },
     }).then(handleOriginalResponse);
   }
 }
