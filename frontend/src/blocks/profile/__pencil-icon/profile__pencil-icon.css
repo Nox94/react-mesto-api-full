@@ -15,7 +15,7 @@
 
 .profile__pencil-icon:hover::after{
     opacity: 0.8;
-    background-image: url(../../../images/pencil-icon.png);
+    background-image: url(../../../images/edit_button.svg);
     background-position: bottom 50% left 40%;
     background-repeat: no-repeat;
     background-size: auto;
