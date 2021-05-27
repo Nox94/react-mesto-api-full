@@ -54,7 +54,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }, [loggedIn]); // посмотреть или спросить
+  }, [loggedIn]);
 
   function handleTokenCheck() {
     const token = localStorage.getItem("token");

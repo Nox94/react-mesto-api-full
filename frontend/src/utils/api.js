@@ -71,7 +71,6 @@ class Api {
   }
 
   createNewCard(data) {
-    console.log(data);
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: { ...this._headers, 'Authorization': token, },
