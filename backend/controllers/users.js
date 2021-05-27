@@ -106,11 +106,9 @@ module.exports.updateUsersProfileById = (req, res, next) => {
 module.exports.updateUsersAvatarById = (req, res, next) => {
   const { avatar } = req.body;
   const id = req.user._id;
-  console.log(req.user._id);
-  console.log(avatar);
   User.findByIdAndUpdate(id, { avatar }, { new: true, runValidators: true })
+  // вторым аргументом у метода должен быть объект
     .then((ava) => {
-      console.log(ava);
       if (!ava) {
         throw new BadRequestError(
           'Переданы некорректные данные при обновлении аватара.',

@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+const BadRequestError = require('../errors/CastError'); // 400
 
 const {
   getAllCards,
@@ -17,11 +19,13 @@ router.post(
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
       link: Joi.string()
-        .required()
-        .pattern(
-          /^(https?:\/\/)(www\.)?([\da-z-.]+)\.([a-z.]{2,6})[\da-zA-Z-._~:?#[\]@!$&'()*+,;=/]*\/?#?$/,
-          'URL',
-        ),
+        .required().custom((value, helpers) => {
+          const isValid = validator.isURL(value, { require_protocol: true });
+          if (isValid) {
+            return value;
+          }
+          return helpers.message('Введены некорректные данные ссылки.');
+        }),
     }),
   }),
   createCard,

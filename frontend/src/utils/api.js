@@ -70,15 +70,15 @@ class Api {
     }).then(handleOriginalResponse);
   }
 
-  createNewCard(card) {
-    // console.log(card);
+  createNewCard(data) {
+    console.log(data);
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: { ...this._headers, 'Authorization': token, },
       body: JSON.stringify({
-        name: card.name,
-        link: card.link,
-        owner: card.owner,
+        name: data.name,
+        link: data.link,
+        // owner: data.owner,
       }),
     }).then(handleOriginalResponse);
   }

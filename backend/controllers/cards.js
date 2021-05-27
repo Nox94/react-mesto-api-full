@@ -1,12 +1,11 @@
 /* eslint-disable consistent-return */
 const Card = require('../models/card');
-const CastError = require('../errors/CastError'); // 400
+const BadRequestError = require('../errors/CastError'); // 400
 const ForbiddenError = require('../errors/ForbiddenError'); // 403
 const NoIdFoundError = require('../errors/NoIdFoundError'); // 404
 
 module.exports.getAllCards = (req, res, next) => {
   Card.find({})
-    // .populate(['owner', 'likes'])
     .populate(['likes'])
     .then((cards) => {
       if (!cards) {
@@ -18,13 +17,14 @@ module.exports.getAllCards = (req, res, next) => {
 };
 module.exports.createCard = (req, res, next) => {
   const owner = req.user._id;
-  // console.log(owner);
+  console.log(owner);
   const { name, link } = req.body;
+  console.log(req.body);
   Card.create({ name, link, owner })
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new CastError('Введены некорректные данные.'));
+        next(new BadRequestError('Введены некорректные данные.'));
       } else {
         next(err);
       }
@@ -50,8 +50,8 @@ module.exports.deleteCard = (req, res, next) => {
             res.send({ card });
           })
           .catch((err) => {
-            if (err.name === 'CastError') {
-              next(new CastError('Введены некорректные данные.'));
+            if (err.name === 'BadRequestError') {
+              next(new BadRequestError('Введены некорректные данные.'));
             } else {
               next(err);
             }
@@ -74,9 +74,9 @@ module.exports.likeCard = (req, res, next) => {
       res.send(card);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
+      if (err.name === 'BadRequestError') {
         next(
-          new CastError('Переданы некорректные данные для постанови лайка.'),
+          new BadRequestError('Переданы некорректные данные для постанови лайка.'),
         );
       } else if (err.message === 'NotFound') {
         next(new NoIdFoundError('Карточка с указанным _id не найдена.'));
@@ -100,9 +100,9 @@ module.exports.dislikeCard = (req, res, next) => {
       res.send(card);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
+      if (err.name === 'BadRequestError') {
         next(
-          new CastError('Переданы некорректные данные для постанови лайка.'),
+          new BadRequestError('Переданы некорректные данные для постанови лайка.'),
         );
       } else if (err.message === 'NotFound') {
         next(new NoIdFoundError('Карточка с указанным _id не найдена.'));

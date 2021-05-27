@@ -41,7 +41,7 @@ function App() {
       api
         .getUserInfo()
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           setCurrentUser(result);
           //устанавливает объект с данными юзера как значение переменной
         })
@@ -62,7 +62,7 @@ function App() {
     if (token) {
       // проверим токен
       auth.getContent(token).then((res) => {
-        console.log(res); //объект пользователя
+        // console.log(res); //объект пользователя
         if (res) {
           setUserEmail(res.email);
           setLoggedIn(true);
