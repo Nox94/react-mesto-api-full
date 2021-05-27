@@ -80,27 +80,24 @@ module.exports.updateUsersProfileById = (req, res, next) => {
     .then((user) => {
       if (!user) {
         throw new NoIdFoundError('Пользователь по указанному id не найден.');
+      } else {
+        res.status(200).send(user);
       }
-      res
-        .status(201)
-        .send(user)
-        .catch((err) => {
-          if (err.name === 'ValidationError') {
-            next(
-              new BadRequestError(
-                'Переданы некорректные данные при обновлении профиля.',
-              ),
-            );
-          } else if (err.message === 'NoIdFound') {
-            next(
-              new NoIdFoundError('Пользователь по указанному id не найден.'),
-            );
-          } else {
-            next(err);
-          }
-        });
-    })
-    .catch(next);
+    }).catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(
+          new BadRequestError(
+            'Переданы некорректные данные при обновлении профиля.',
+          ),
+        );
+      } else if (err.message === 'NoIdFound') {
+        next(
+          new NoIdFoundError('Пользователь по указанному id не найден.'),
+        );
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports.updateUsersAvatarById = (req, res, next) => {

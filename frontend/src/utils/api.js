@@ -78,7 +78,6 @@ class Api {
       body: JSON.stringify({
         name: data.name,
         link: data.link,
-        // owner: data.owner,
       }),
     }).then(handleOriginalResponse);
   }
