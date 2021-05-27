@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
@@ -42,8 +43,26 @@ app.get('/crash-test', () => {
 app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
 
-app.post('/signup', createUser);
-app.post('/signin', login);
+app.post(
+  '/signup',
+  celebrate({
+    body: Joi.object().keys({
+      email: Joi.string().required().min(2).max(30),
+      password: Joi.string().required().min(2).max(30),
+    }),
+  }),
+  createUser,
+);
+app.post(
+  '/signin',
+  celebrate({
+    body: Joi.object().keys({
+      email: Joi.string().required().min(2).max(30),
+      password: Joi.string().required().min(2).max(30),
+    }),
+  }),
+  login,
+);
 
 // auth дает req.user._id
 app.use('/users', auth, users);

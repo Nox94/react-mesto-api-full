@@ -50,30 +50,32 @@ module.exports.createUser = (req, res, next) => {
         'Переданы некорректные данные при создании пользователя.',
       ),
     );
-  } bcrypt
-    .hash(password, 10)
-    .then((hash) => User.create({
-      name,
-      about,
-      avatar,
-      email,
-      password: hash, // хеш записан в базу
-    }).then((user) => res.status(201).send(user)))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(
-          new BadRequestError(
-            'Переданы некорректные данные при создании пользователя.',
-          ),
-        );
-      } else if (err.name === 'MongoError' && err.code === 11000) {
-        next(
-          new RegisterError('Пользователь с таким Email уже зарегистрирован.'),
-        );
-      } else {
-        next(err);
-      }
-    });
+  } else {
+    bcrypt
+      .hash(password, 10)
+      .then((hash) => User.create({
+        name,
+        about,
+        avatar,
+        email,
+        password: hash, // хеш записан в базу
+      }).then((user) => res.status(201).send(user)))
+      .catch((err) => {
+        if (err.name === 'ValidationError') {
+          next(
+            new BadRequestError(
+              'Переданы некорректные данные при создании пользователя.',
+            ),
+          );
+        } else if (err.name === 'MongoError' && err.code === 11000) {
+          next(
+            new RegisterError('Пользователь с таким Email уже зарегистрирован.'),
+          );
+        } else {
+          next(err);
+        }
+      });
+  }
 };
 
 module.exports.updateUsersProfileById = (req, res, next) => {
