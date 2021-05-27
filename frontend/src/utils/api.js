@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 
 const baseUrl =
   process.env.NODE_ENV === "production"

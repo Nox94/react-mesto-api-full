@@ -4,8 +4,8 @@ const AuthError = require('../errors/AuthError'); // 401
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
-  const token = req.headers.authorization;
-  // console.log(req.headers.authorization);
+  const token = req.headers.authorization.replace('Bearer ', '');
+  console.log(req.headers.authorization);
   if (!token) {
     next(new AuthError('Необходима авторизация.'));
   } else {
