@@ -113,13 +113,13 @@ module.exports.updateUsersProfileById = (req, res, next) => {
 module.exports.updateUsersAvatarById = (req, res, next) => {
   const { id, avatar } = req.body;
   User.findByIdAndUpdate(id, avatar, { new: true, runValidators: true })
-    .then((avatar) => {
-      if (!avatar) {
+    .then((ava) => {
+      if (!ava) {
         throw new BadRequestError(
           'Переданы некорректные данные при обновлении аватара.',
         );
       }
-      res.status(201).send(avatar);
+      res.status(201).send(ava);
     })
     .catch((err) => {
       if (err.message === 'NoIdFound') {
