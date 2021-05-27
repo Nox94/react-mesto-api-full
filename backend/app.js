@@ -21,13 +21,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-var whitelist = [
+const whitelist = [
   'http://localhost:3001',
   'https://nox-mesto.nomoredomains.monster',
   'http://nox-mesto.nomoredomains.monster',
 ];
-var corsOptions = {
-  origin: whitelist
+const corsOptions = {
+  origin: whitelist,
 };
 
 app.use(cors(corsOptions));
@@ -41,12 +41,12 @@ app.get('/crash-test', () => {
 
 app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
+
 app.post('/signup', createUser);
 app.post('/signin', login);
 
 // auth дает req.user._id
-
-app.use('/users',auth, users);
+app.use('/users', auth, users);
 app.use('/cards', auth, cards);
 
 app.use('*', (req, res, next) => {
