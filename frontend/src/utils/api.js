@@ -5,6 +5,8 @@ const baseUrl =
     ? "https://api.nox-mesto.nomoredomains.monster"
     : "http://localhost:3000";
 
+const token = localStorage.getItem('token');
+
 const handleOriginalResponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Error: ${res.status}`);
@@ -29,7 +31,7 @@ class Api {
     // console.log(data);
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
-      headers: {...this._headers, 'Authorization': `Bearer ${token}`,
+      headers: { ...this._headers, 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({
         name: data.name,
         about: data.about,
