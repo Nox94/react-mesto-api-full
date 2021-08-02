@@ -90,7 +90,6 @@ class Api {
 }
 
 
-
 export const api = new Api(baseUrl, {
   "Content-Type": "application/json",
   Accept: "application/json",
